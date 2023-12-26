@@ -1,0 +1,54 @@
+<meta>
+    <info author="thisdp &amp;&amp; borsuczyna" name="MTA Lua RW Loader" />
+    
+    <script src='utils/class.lua' type='client'/>
+    <script src='utils/stream.lua' type='client'/>
+
+    <!-- DFF -->
+    <script src='DFF/enums.lua' type='client'/>
+
+    <script src='DFF/UVAnimDict.lua' type='client'/>
+    <script src='DFF/UVAnim.lua' type='client'/>
+    <script src='DFF/Clump.lua' type='client'/>
+    <script src='DFF/IndexStruct.lua' type='client'/>
+    <script src='DFF/Light.lua' type='client'/>
+    <script src='DFF/FrameList.lua' type='client'/>
+    <script src='DFF/Frame.lua' type='client'/>
+    <script src='DFF/GeometryList.lua' type='client'/>
+    <script src='DFF/Geometry.lua' type='client'/>
+    <script src='DFF/NightVertexColor.lua' type='client'/>
+    <script src='DFF/MaterialList.lua' type='client'/>
+    <script src='DFF/Material.lua' type='client'/>
+    <script src='DFF/ReflectionMaterial.lua' type='client'/>
+    <script src='DFF/SpecularMaterial.lua' type='client'/>
+    <script src='DFF/Texture.lua' type='client'/>
+    <script src='DFF/String.lua' type='client'/>
+    <script src='DFF/MorphPLG.lua' type='client'/>
+    <script src='DFF/BinMeshPLG.lua' type='client'/>
+    <script src='DFF/Breakable.lua' type='client'/>
+    <script src='DFF/MaterialEffectPLG.lua' type='client'/>
+    <script src='DFF/UVAnimPLG.lua' type='client'/>
+    <script src='DFF/HAnimPLG.lua' type='client'/>
+    <script src='DFF/SkinPLG.lua' type='client'/>
+    <script src='DFF/COLSection.lua' type='client'/>
+    <script src='DFF/Atomic.lua' type='client'/>
+    <script src='DFF/Pipline.lua' type='client'/>
+    <script src='DFF/DFFIO.lua' type='client'/>
+
+    <!-- COL -->
+    <script src='COL/Collision.lua' type='client'/>
+    <script src='COL/FaceGroup.lua' type='client'/>
+    <script src='COL/TBounds.lua' type='client'/>
+    <script src='COL/TBox.lua' type='client'/>
+    <script src='COL/TFace.lua' type='client'/>
+    <script src='COL/TSphere.lua' type='client'/>
+    <script src='COL/TSurface.lua' type='client'/>
+    <script src='COL/TVertex.lua' type='client'/>
+    <script src='COL/COLIO.lua' type='client'/>
+
+    <!-- test -->
+    <file src='data/plane.dff'/>
+    <file src='data/empty.dff'/>
+    <file src='data/plane.txd'/>
+    <script src='test.lua' type='client'/>
+</meta>
