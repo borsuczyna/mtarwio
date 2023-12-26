@@ -524,7 +524,7 @@ class "Geometry" {
 		if self.extension.binMeshPLG then
 			local materialSplit = self.extension.binMeshPLG.materialSplits[materialId]
 			if not materialSplit then
-				materialSplit = {0, materialId, {}}
+				materialSplit = {0, materialId - 1, {}}
 				table.insert(self.extension.binMeshPLG.materialSplits, materialSplit)
 				self.extension.binMeshPLG.materialSplitCount = self.extension.binMeshPLG.materialSplitCount + 1
 			end
