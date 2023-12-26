@@ -3,11 +3,12 @@ class "MorphPLG" {
 	
     extend = "Section",
 	unused = false,
-	init = function(self,ver)
+	init = function(self,version)
 		self.unused = 0
 		self.size = self:getSize(true)
 		self.version = version
 		self.type = MorphPLG.typeID
+		return self
 	end,
 	methodContinue = {
 		read = function(self,readStream)

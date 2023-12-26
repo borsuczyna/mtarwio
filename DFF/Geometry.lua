@@ -464,7 +464,10 @@ class "Geometry" {
 
 		-- add tex coord
 		if self.struct.bTextured then
-			table.insert(self.struct.texCoords[materialId], texCoord)
+			for i = 1, #self.struct.texCoords do
+				table.insert(self.struct.texCoords[i], texCoord)
+			end
+			-- table.insert(self.struct.texCoords[materialId], texCoord)
 		end
 
 		-- return added vertex index
@@ -556,6 +559,39 @@ class "Geometry" {
 		if self.extension.nightVertexColor then
 			self.extension.nightVertexColor.colors = { { 0, 0, 0, 0 } }
 		end
-		
-	end
+	end,
+
+	addMaterial = function(self, materialName)
+		-- create material
+		local material = Material()
+		material.parent = self.materialList
+		material:init(self.version)
+
+		-- material.struct = MaterialStruct():init(self.version)
+		-- material.struct.parent = material
+		-- material.extension = MaterialExtension():init(self.version)
+		-- material.extension.parent = material
+
+		material.isTextured = true
+		material.struct.isTextured = true
+		material.texture = Texture():init(self.version)
+		-- material.texture.textureName = String()
+		-- material.texture.textureName.parent = self
+		material.texture.textureName:setString(materialName, 24)
+
+		local materialId = #self.materialList.materials + 1
+		self.materialList.materials[materialId] = material
+		self.materialList.struct.materialIndices[materialId] = -1
+		self.materialList.struct.materialCount = self.materialList.struct.materialCount + 1
+
+		local a = inspect(self.materialList.materials[1]) .. '\n\n\n-elo-\n\n\n' .. inspect(self.materialList.materials[2])
+		-- local test = fileCreate('test.txt')
+		-- fileWrite(test, a)
+		-- fileClose(test)
+
+		-- add empty tex coords
+		self.struct.texCoords[materialId] = { }
+
+		return materialId
+	end,
 }

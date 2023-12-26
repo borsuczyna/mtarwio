@@ -1,3 +1,38 @@
+class "MaterialListStruct" {
+	extend = "Struct",
+	materialCount = false,
+	materialIndices = false,
+	init = function(self,version)
+		self.materialCount = 0
+		self.materialIndices = {}
+		self.size = self:getSize(true)
+		self.version = version
+		self.type = MaterialListStruct.typeID
+		return self
+	end,
+	methodContinue = {
+		read = function(self,readStream)
+			self.materialCount = readStream:read(uint32)
+			self.materialIndices = {}
+			for i=1,self.materialCount do
+				--For material, -1; For a pointer of existing material, other index value.
+				self.materialIndices[i] = readStream:read(int32)
+			end
+		end,
+		write = function(self,writeStream)
+			writeStream:write(self.materialCount,uint32)
+			for i=1,self.materialCount do
+				writeStream:write(self.materialIndices[i],int32)
+			end
+		end,
+		getSize = function(self)
+			local size = 4+4*self.materialCount
+			self.size = size
+			return size
+		end,
+	}
+}
+
 class "MaterialList" {
     typeID = 0x08,
 	

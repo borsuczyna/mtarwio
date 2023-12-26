@@ -7,11 +7,14 @@ class "TextureStruct" {
 	VAddressing = false,
 	hasMipmaps = false,
 	--
-	init = function(self,ver)
+	init = function(self,version)
 		self.flags = 0
 		self.size = self:getSize(true)
 		self.version = version
 		self.type = TextureStruct.typeID
+		self.UAddressing = 0
+		self.VAddressing = 0
+		return self
 	end,
 	methodContinue = {
 		read = function(self,readStream)
@@ -42,7 +45,7 @@ class "Texture" {
 	textureName = false,
 	maskName = false,
 	extension = false,
-	init = function(self,ver)
+	init = function(self,version)
 		self.struct = TextureStruct():init(version)
 		self.struct.parent = self
 		self.textureName = String():init(version)
@@ -54,6 +57,7 @@ class "Texture" {
 		self.size = self:getSize(true)
 		self.version = version
 		self.type = Texture.typeID
+		return self
 	end,
 	methodContinue = {
 		read = function(self,readStream)

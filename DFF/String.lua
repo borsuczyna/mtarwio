@@ -3,11 +3,16 @@ class "String" {
 	
     extend = "Section",
 	string = false,
-	init = function(self,ver)
+	init = function(self,version)
 		self.string = ""
 		self.size = self:getSize(true)
 		self.version = version
 		self.type = String.typeID
+		return self
+	end,
+	setString = function(self,str,size)
+		self.string = str
+		self.size = size or 0
 	end,
 	methodContinue = {
 		read = function(self,readStream)
@@ -19,7 +24,7 @@ class "String" {
 			writeStream:write(string.rep("\0",diff),bytes,diff)
 		end,
 		getSize = function(self)
-			return self.size
+			return #self.string
 		end,
 	}
 }
