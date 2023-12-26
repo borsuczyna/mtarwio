@@ -457,6 +457,11 @@ class "Geometry" {
 			table.insert(self.struct.vertexColors, color)
 		end
 
+		-- add normals
+		if self.struct.bNormal then
+			table.insert(self.struct.normals, { 0, 0, 0 }) -- todo someday?
+		end
+
 		-- add night color
 		if self.extension.nightVertexColor then
 			table.insert(self.extension.nightVertexColor.colors, nightColor)

@@ -14,8 +14,9 @@ class "COLIO" {
 		self.collision = Collision()
 		self.collision:read(self.readStream)
 	end,
-	generateFromGeometry = function(self,colVersion,geometry,matList)
+	generateFromGeometry = function(self,colVersion,geometry,matList,light)
 		--Deal with materials
+		local light = light or 0
 		local matRef = {}
 		if type(matList) == "table" then
 			for k,v in pairs(matList) do
@@ -56,7 +57,7 @@ class "COLIO" {
 			collision.faces[i].a = geoFaces[i][1]
 			collision.faces[i].b = geoFaces[i][2]
 			collision.faces[i].c = geoFaces[i][4]
-			collision.faces[i].surface.light = 1
+			collision.faces[i].surface.light = light
 			collision.faces[i].surface.material = 0
 			local faceHash = geoFaces[i][2].."-"..geoFaces[i][1].."-"..geoFaces[i][4]
 			faceHashTable[faceHash] = i
