@@ -469,10 +469,7 @@ class "Geometry" {
 
 		-- add tex coord
 		if self.struct.bTextured then
-			for i = 1, #self.struct.texCoords do
-				table.insert(self.struct.texCoords[i], texCoord)
-			end
-			-- table.insert(self.struct.texCoords[materialId], texCoord)
+			table.insert(self.struct.texCoords[1], texCoord)
 		end
 
 		-- return added vertex index

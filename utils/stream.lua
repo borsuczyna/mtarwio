@@ -360,6 +360,10 @@ class "ReadStream" {
 			result = readNumber(self.cachedStr,dataType,readingPos)
 			length = dataType[2]
 		end
+		if not length then
+			local db = debug.getinfo(2)
+			error(db.source..":"..db.currentline..": Bad argument @ReadStream at argument 1, expected a number got "..type(length))
+		end
 		self.readingPos = readingPos+length
 		return result
 	end,
@@ -371,6 +375,11 @@ class "WriteStream" {
 		self.writingPos = 1
 	end,
 	write = function(self,data,dataType,additionLen)
+		if not dataType then
+			local db = debug.getinfo(2)
+			error(db.source..":"..db.currentline..": Bad argument @WriteStream at argument 2, expected a table got nil")
+		end
+		
 		local dType = dataType.type
 		local buffer = self.buffer
 		local bufferPos = #buffer+1

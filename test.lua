@@ -85,11 +85,39 @@ col:generateFromGeometry("COLL",dff.clumps[1].geometryList.geometries[1],{
 	[{255,255,255}] = 1,	--find material ID by color, and convert to col material
 })
 
+local txd = TXDIO()
+txd:load("data/plane.txd")
+
+-- local dds = txd:getTexture('color')
+-- local texture = dxCreateTexture(dds)
+local changeMe = dxCreateTexture('data/changeme.png', 'dxt1', true)
+local addMe = dxCreateTexture('data/addme.png', 'dxt1', true)
+txd:setTexture('test', changeMe)
+local newid = txd:addTexture('new', addMe)
+
+-- local ddsData = dxGetTexturePixels(changeMe, 'dds', 'dxt1', true)
+local dds = txd:getTexture('color')
+local texture = dxCreateTexture(dds)
+local width, height = txd:getTextureDimensions('color')
+
+-- local testTexture = dxCreateTexture(txd:getTexture('test'))
+-- local testWidth, testHeight = txd:getTextureDimensions('test')
+
+addEventHandler('onClientRender', root, function()
+    dxDrawImage(0, 0, 60, 60, texture)
+    dxDrawImage(60, 0, 60, 60, changeMe)
+--     dxDrawImage(0, height, testWidth, testHeight, testTexture)
+end)
+-- txd:save('testtt.txd')
+
+-- iprint(txd:listTextures())
+
 -- setClipboard(inspect(dff.clumps[1].geometryList.geometries[1].materialList.materials[1]))
 
-engineImportTXD(engineLoadTXD('data/plane.txd'), 5507)	
+txd:save('test2.txd')
+engineImportTXD(engineLoadTXD(txd:save()), 5507)
 engineReplaceModel(engineLoadDFF(dff:save()), 5507)
 engineReplaceCOL(engineLoadCOL(col:save()), 5507)
-dff:save('empty.dff')
+-- dff:save('empty.dff')
 local ob = createObject(5507, -712.05090, 945.73853, 12.35322)
 setElementPosition(localPlayer, -712.05090, 945.73853, 13.35322)
