@@ -445,9 +445,6 @@ class "Geometry" {
 	end,
 
 	addVertex = function(self, position, color, nightColor, texCoord, materialId)
-		if not materialId then materialId = 1 end
-		assert(self.struct.texCoords[materialId] ~= nil, "Material " .. materialId .. " does not exist")
-
 		-- add vertex
 		table.insert(self.struct.vertices, position)
 		self.struct.vertexCount = #self.struct.vertices

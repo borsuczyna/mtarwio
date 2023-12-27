@@ -12,21 +12,21 @@ class "DFFIO" {
 				fileClose(f)
 			end
 		end
-		self.readStream = ReadStream(pathOrRaw)
+		local readStream = ReadStream(pathOrRaw)
 		self.clumps = {}
-		while self.readStream.readingPos+12 < #pathOrRaw do
+		while readStream.readingPos+12 < #pathOrRaw do
 			local nextSection = Section()
 			nextSection.parent = self
-			nextSection:read(self.readStream)
+			nextSection:read(readStream)
 			self.version = nextSection.version
 			if nextSection.type == UVAnimDict.typeID then
 				recastClass(nextSection,UVAnimDict)
 				self.uvAnimDict = nextSection
-				nextSection:read(self.readStream)
+				nextSection:read(readStream)
 			elseif nextSection.type == Clump.typeID then
 				recastClass(nextSection,Clump)
 				self.clumps[#self.clumps+1] = nextSection
-				nextSection:read(self.readStream)
+				nextSection:read(readStream)
 			else
 				break	--Read End
 			end

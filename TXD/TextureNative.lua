@@ -32,7 +32,7 @@ class "TextureNativeStruct" {
 		self.palette = ""
 		self.mipmaps = {}
 		self.version = version
-		self.size = self:getSize()
+		self.size = self:getSize(true)
 		self.sizeVersion = 0
 		self.type = 1
 		return self
@@ -65,7 +65,7 @@ class "TextureNativeStruct" {
 			end
         end,
 		write = function(self,writeStream)
-			self.size = self:getSize()
+			self.size = self:getSize(true)
 
 			writeStream:write(self.platform, uint32)
 			writeStream:write(self.filterFlags, uint32)
@@ -89,6 +89,17 @@ class "TextureNativeStruct" {
 				writeStream:write(size, uint32)
 				writeStream:write(data, bytes, size)
 			end
+		end,
+		getSize = function(self)
+			local size = 0
+			size = size + 4 + 4 + 32 + 32 + 4
+			size = size + 4 + 2 + 2 + 1 + 1 + 1 + 1
+			size = size + (self.depth == 7 and 256 * 4 or 0)
+			for i = 1, self.mipMapCount do
+				local data = self.mipmaps[i] or {}
+				size = size + 4 + #data
+			end
+			return size
 		end,
     }
 }
@@ -127,7 +138,7 @@ class "TextureNative" {
 		self.extension = TextureNativeExtension():init(version)
 		self.type = TextureNative.typeID
 
-		self.size = self:getSize()
+		self.size = self:getSize(true)
 		self.sizeVersion = 0
 		self.type = TextureNative.typeID
 		self.version = version
@@ -147,7 +158,7 @@ class "TextureNative" {
 			self.extension:read(readStream)
 		end,
 		write = function(self,writeStream)
-			self.size = self:getSize()
+			self.size = self:getSize(true)
 			self.struct:write(writeStream)
 			self.extension:write(writeStream)
 		end,

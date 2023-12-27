@@ -71,6 +71,8 @@
     <file src='data/changeme.png'/>
     <file src='data/addme.png'/>
     <file src='data/empty.dff'/>
+    <file src='data/empty.txd'/>
     <file src='data/plane.txd'/>
+    <file src='data/billbox.txd'/>
     <script src='test.lua' type='client'/>
 </meta>

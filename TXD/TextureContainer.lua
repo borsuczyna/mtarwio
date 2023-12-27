@@ -2,13 +2,21 @@ class "TextureContainerStruct" {
 	extend = "Struct",
 	count = false,
 	deviceID = false,
+	init = function(self,version)
+		self.size = self:getSize(true)
+		self.version = version
+		self.type = Struct.typeID
+		self.count = 0
+		self.deviceID = 0
+		return self
+	end,
 	methodContinue = {
 		read = function(self,readStream)
 			self.count = readStream:read(uint16)
 			self.deviceID = readStream:read(uint16)
-
 		end,
 		write = function(self,writeStream)
+			self.size = self:getSize(true)
 			writeStream:write(self.count,uint16)
 			writeStream:write(self.deviceID,uint16)
 		end,
@@ -25,6 +33,15 @@ class "TextureContainer" {
 	struct = false,
 	textures = false,
 	extension = false,
+	init = function(self,version)
+		self.type = 0x16
+		self.version = version
+		self.struct = TextureContainerStruct():init(version)
+		self.textures = {}
+		self.extension = TextureNativeExtension():init(version)
+		self.size = self:getSize(true)
+		return self
+	end,
 	methodContinue = {
 		read = function(self,readStream)
 			self.struct = TextureContainerStruct()
@@ -41,6 +58,7 @@ class "TextureContainer" {
 			self.extension:read(readStream)
 		end,
 		write = function(self,writeStream)
+			self.size = self:getSize(true)
 			self.struct:write(writeStream)
 
 			for i=1,self.struct.count do
@@ -89,7 +107,7 @@ class "TextureContainer" {
 		
 		table.insert(self.textures,textureNative)
 		self.struct.count = self.struct.count+1
-		self.size = self:getSize()
+		self.size = self:getSize(true)
 		
 		return self.struct.count
 	end,

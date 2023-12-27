@@ -365,6 +365,7 @@ class "ReadStream" {
 			error(db.source..":"..db.currentline..": Bad argument @ReadStream at argument 1, expected a number got "..type(length))
 		end
 		self.readingPos = readingPos+length
+
 		return result
 	end,
 }

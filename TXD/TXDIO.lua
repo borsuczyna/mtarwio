@@ -2,6 +2,10 @@ class "TXDIO" {
 	textureContainer = false,
 	readStream = false,
 	writeStream = false,
+	new = function(self,version)
+		self.textureContainer = TextureContainer():init(version or EnumRWVersion.GTASA)
+		return self
+	end,
 	load = function(self,pathOrRaw)
 		if fileExists(pathOrRaw) then
 			local f = fileOpen(pathOrRaw)
@@ -10,9 +14,10 @@ class "TXDIO" {
 				fileClose(f)
 			end
 		end
-		self.readStream = ReadStream(pathOrRaw)
+		local readStream = ReadStream(pathOrRaw)
 		self.textureContainer = TextureContainer()
-		self.textureContainer:read(self.readStream)
+		self.textureContainer:read(readStream)
+		return self
 	end,
 	save = function(self,fileName)
 		self.writeStream = WriteStream()
@@ -37,24 +42,6 @@ class "TXDIO" {
 
 		return nameList
 	end,
-
-	-- getTextureNativeDataByIndex = function(self,index)
-	-- 	local txdChildren = self.textureContainer.textures
-	-- 	if txdChildren[index] then
-	-- 		return txdChildren[index].struct
-	-- 	end
-	-- end,
-
-	-- getTextureNativeDataByName = function(self,name)
-	-- 	local txdChildren = self.textureContainer.textures
-	-- 	local textureDataList = {}
-	-- 	for _,texNative in ipairs(txdChildren) do
-	-- 		if texNative.struct.name == name then
-	-- 			table.insert(textureDataList,texNative.struct)
-	-- 		end
-	-- 	end
-	-- 	return textureDataList
-	-- end,
 
 	getTextureNativeData = function(self, indexOrName)
 		local txdChildren = self.textureContainer.textures
@@ -108,6 +95,7 @@ class "TXDIO" {
 			-- local writeStream = WriteStream()
 			-- bmp:write(writeStream)
 			-- return writeStream:save()
+			error('Plain textures are not supported yet (and probably never will be)')
 		end
 	end,
 	

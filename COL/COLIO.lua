@@ -10,9 +10,9 @@ class "COLIO" {
 				fileClose(f)
 			end
 		end
-		self.readStream = ReadStream(pathOrRaw)
+		local readStream = ReadStream(pathOrRaw)
 		self.collision = Collision()
-		self.collision:read(self.readStream)
+		self.collision:read(readStream)
 	end,
 	generateFromGeometry = function(self,colVersion,geometry,matList,light)
 		--Deal with materials
