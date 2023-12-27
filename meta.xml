@@ -48,31 +48,10 @@
     <script src='COL/COLIO.lua' type='client'/>
 
     <!-- TXD -->
-    <!-- <script src='TXD/enums.lua' type='client'/>
-    <script src='TXD/DDSPixelFormat.lua' type='client'/>
-    <script src='TXD/DDSCaps.lua' type='client'/>
-    <script src='TXD/DDSHeader.lua' type='client'/>
-    <script src='TXD/BMPTexture.lua' type='client'/>
-    <script src='TXD/DDSTexture.lua' type='client'/>
-    <script src='TXD/TextureDictionary.lua' type='client'/>
-    <script src='TXD/TextureDictionaryStruct.lua' type='client'/>
-    <script src='TXD/TextureNative.lua' type='client'/>
-    <script src='TXD/TextureNativeStruct.lua' type='client'/> -->
-
     <script src='TXD/enums.lua' type='client'/>
     <script src='TXD/DDSMipmaps.lua' type='client'/>
     <script src='TXD/DDS.lua' type='client'/>
     <script src='TXD/TextureContainer.lua' type='client'/>
     <script src='TXD/TextureNative.lua' type='client'/>
     <script src='TXD/TXDIO.lua' type='client'/>
-
-    <!-- test -->
-    <file src='data/plane.dff'/>
-    <file src='data/changeme.png'/>
-    <file src='data/addme.png'/>
-    <file src='data/empty.dff'/>
-    <file src='data/empty.txd'/>
-    <file src='data/plane.txd'/>
-    <file src='data/billbox.txd'/>
-    <script src='test.lua' type='client'/>
 </meta>
